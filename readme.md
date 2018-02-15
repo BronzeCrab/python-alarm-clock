@@ -13,12 +13,16 @@ Next install gstreamer python bindings:
 
 Next u can do:
 
-`python alarm_clock.py -start` to start
+`python alarm_clock.py -start`  
+ to start
 
-`python alarm_clock.py -status` to get status (it will be displayed in log). By default log is `/tmp/test.log`. U can change
+`python alarm_clock.py -status`  
+
+to get status (it will be displayed in log). By default log is `/tmp/test.log`. U can change
 log folder just by editing `log_file` variable.
 
-`python alarm_clock.py -stop` to stop it.
+`python alarm_clock.py -stop`  
+ to stop it.
 
 ##### What time to play
 Also you can specify what time to play track, just edit `time_weekdays` and `time_weekend` vars.
