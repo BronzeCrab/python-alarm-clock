@@ -15,7 +15,7 @@ Next u can do:
 
 `python alarm_clock.py -start`  
 
- to start
+ to start.
 
 `python alarm_clock.py -status`  
 
