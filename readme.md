@@ -7,7 +7,7 @@ behave like a daemon.
 
 - logging
 - works like a daemon, dont block terminal
-- you can specify as many tracks as you want, they will be played one by one
+- you can specify as many tracks as you want, they will be played one by one each time
 
 #### How to install:
 `pip install -r requirements` in order to install `daemonize` library.
