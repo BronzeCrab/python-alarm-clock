@@ -28,4 +28,4 @@ log folder just by editing `log_file` variable.
 Also you can specify what time to play track, just edit `time_weekdays` and `time_weekend` vars.
 ##### Specify tracks to play
 You can specidy and change tracks, just edit `basic_path` and `song_array` vars. And set as many tracks  
-as you wish
+as you wish.
