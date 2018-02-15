@@ -1,6 +1,13 @@
 #### What is it:
+
 This is python and gstreamer based alarm clock for debian-based systems. It uses `daemonize` lib to
 behave like a daemon.
+
+#### Features:
+
+- logging
+- works like a daemon, dont block terminal
+- you can specify as many tracks as you want, they will be played one by one
 
 #### How to install:
 `pip install -r requirements` in order to install `daemonize` library.
@@ -27,7 +34,10 @@ log folder just by editing `log_file` variable.
  to stop it.
 
 ##### What time to play
+
 Also you can specify what time to play track, just edit `time_weekdays` and `time_weekend` vars.
+
 ##### Specify tracks to play
+
 You can specidy and change tracks, just edit `basic_path` and `song_array` vars. And set as many tracks  
 as you wish.
