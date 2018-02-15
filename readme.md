@@ -6,14 +6,18 @@ behave like a daemon.
 `pip install -r requirements` in order to install `daemonize` library.
 
 Next install gstreamer python bindings:
+
 `apt-get install python-gst0.10 gstreamer0.10-plugins-good gstreamer0.10-plugins-ugly`
 
 #### How to start and control:
 
 Next u can do:
+
 `python alarm_clock.py -start` to start
+
 `python alarm_clock.py -status` to get status (it will be displayed in log). By default log is `/tmp/test.log`. U can change
 log folder just by editing `log_file` variable.
+
 `python alarm_clock.py -stop` to stop it.
 
 ##### What time to play
