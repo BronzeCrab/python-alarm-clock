@@ -16,7 +16,7 @@ log_file = "/tmp/test.log"
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 logger.propagate = False
-fh = logging.FileHandler("/tmp/test.log", "a")
+fh = logging.FileHandler(log_file, "a")
 fh.setLevel(logging.DEBUG)
 logger.addHandler(fh)
 keep_fds = [fh.stream.fileno()]
