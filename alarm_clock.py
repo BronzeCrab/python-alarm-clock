@@ -26,7 +26,7 @@ time_weekdays = "8:30"
 time_weekend = "9:00"
 
 # paths to songs
-basic_path = '/home/austinnikov/austinnikov/Downloads/'
+basic_path = '/home/austinnikov/Downloads/'
 song_array = (basic_path+'test.mp3', basic_path+'test2.mp3')
 
 
