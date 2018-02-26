@@ -2,8 +2,7 @@ import gst
 import gobject
 import threading
 import logging
-import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from daemonize import Daemonize
 import argparse
 import sys
@@ -22,7 +21,7 @@ logger.addHandler(fh)
 keep_fds = [fh.stream.fileno()]
 
 # what time to play
-time_weekdays = "8:30"
+time_weekdays = "21:05"
 time_weekend = "9:00"
 
 # paths to songs
@@ -51,7 +50,6 @@ class AlarmClock():
     def play(self):
         self.is_playing = True
         self.player.set_state(gst.STATE_PLAYING)
-        logger.debug("player set to play")
 
     def handle_error(self, message):
         logger.debug(message)
@@ -93,35 +91,6 @@ class GobInit(threading.Thread):
         self.loop.run()
 
 
-def get_delta(datetime_obj, str_date, time_weekdays, time_weekend,
-              current_datetime_obj=None):
-    """Function to detemine diff between to datetime objects"""
-
-    if datetime_obj.weekday() not in (5, 6):
-        datetime_play = datetime.strptime(
-            str_date + " " + time_weekdays,  "%d/%m/%Y %H:%M")
-    else:
-        datetime_play = datetime.strptime(
-            str_date + " " + time_weekend,  "%d/%m/%Y %H:%M")
-    if current_datetime_obj:
-        delta = datetime_play - current_datetime_obj
-    else:
-        delta = datetime_play - datetime_obj
-    return delta
-
-
-def sleep_till_next_play(
-        current_datetime, time_weekdays, time_weekend, logger):
-    next_datetime = current_datetime + timedelta(days=1)
-    next_str_date = next_datetime.strftime('%d/%m/%Y')
-    delta = get_delta(
-        next_datetime, next_str_date, time_weekdays, time_weekend,
-        current_datetime)
-    sleep_sec = delta.total_seconds()
-    logger.debug("sleep till next start for {0} sec".format(sleep_sec))
-    time.sleep(sleep_sec)
-
-
 def main():
     logger.debug("start")
     gob = GobInit()
@@ -129,24 +98,21 @@ def main():
     player = AlarmClock(song_array)
     logger.debug("player created")
 
-    current_datetime = datetime.now()
-    current_str_date = current_datetime.strftime('%d/%m/%Y')
-    delta = get_delta(
-        current_datetime, current_str_date, time_weekdays, time_weekend)
-    # time for play is gone, sleep till next time:
-    if delta.total_seconds() < 0:
-        sleep_till_next_play(
-            current_datetime, time_weekdays, time_weekend, logger)
-    # sleep till time to play:
-    else:
-        sleep_sec = delta.total_seconds()
-        logger.debug("sleep till start for {0} sec".format(sleep_sec))
-        time.sleep(sleep_sec)
+    hour_weekdays = int(time_weekdays.split(':')[0])
+    minute_weekdays = int(time_weekdays.split(':')[1])
+
+    hour_weekend = int(time_weekend.split(':')[0])
+    minute_weekend = int(time_weekend.split(':')[1])
 
     while True:
-        player.play()
-        sleep_till_next_play(
-            datetime.now(), time_weekdays, time_weekend, logger)
+        now = datetime.now()
+        if any((
+                now.weekday() in (5, 6) and
+                (hour_weekend == now.hour and minute_weekend == now.minute),
+                now.weekday() not in (5, 6) and
+                (hour_weekdays == now.hour and minute_weekdays == now.minute)
+        )):
+            player.play()
 
 
 def kill(pid_f, logger):
