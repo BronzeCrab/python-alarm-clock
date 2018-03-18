@@ -10,7 +10,7 @@ behave like a daemon.
 - you can specify as many tracks as you want, they will be played one by one each time
 
 #### How to install:
-`pip install -r requirements` in order to install `daemonize` library.
+`pip install -r requirements.txt` in order to install `daemonize` library.
 
 Next install gstreamer python bindings:
 

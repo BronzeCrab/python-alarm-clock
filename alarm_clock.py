@@ -21,8 +21,8 @@ logger.addHandler(fh)
 keep_fds = [fh.stream.fileno()]
 
 # what time to play
-time_weekdays = "21:05"
-time_weekend = "9:00"
+time_weekdays = "8:30"
+time_weekend = "10:00"
 
 # paths to songs
 basic_path = '/home/austinnikov/Downloads/'
